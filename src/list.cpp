@@ -46,9 +46,6 @@ int main()
         for(auto it = DoublyLinkedList.cbegin(); it!=DoublyLinkedList.cend(); ++it)
             std::cout<<*it<<"  ";
 
-        std::cout << "" << '\n';
-        std::cout << "My list: ***************** " << list.print() << '\n';
-
     }
     catch(std::out_of_range const& ex)
     {

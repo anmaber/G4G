@@ -4,8 +4,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <type_traits>
-#include <algorithm>
-#include <utility>
 
 template<class Type>
 class DoublyLinkedList
@@ -31,7 +29,6 @@ public:
     Node<Type>* find(const Type& element) const;
     void remove(const Type& element);
     Type& operator [] (int index);
-    std::string print();
 
     Iterator begin();
     Iterator end();
@@ -51,7 +48,7 @@ public:
         */
         using reference = typename std::conditional_t< isConst, Type const &, Type & >;
         // using pointer = typename std::conditional_t< isConst, Type const *, Type * >;
-        MyIterator():
+        MyIterator() :
             current (nullptr) {}
 
         MyIterator(Node<Type>* node):
@@ -104,7 +101,6 @@ public:
         {
             return current->value;
         }
-
     };
 };
 
@@ -264,14 +260,3 @@ typename DoublyLinkedList<Type>::ConstIterator DoublyLinkedList<Type>::cend() co
 {
     return ConstIterator(tail->next);
 }
-
-template<class Type>
-std::string List<Type>::print()
-{
-    std::string retVal;
-    std::for_each(begin(), end(), [&retVal](const auto& it) {
-        retVal += std::to_string(it) + ", ";
-                });
-    return retVal;
-}
-
