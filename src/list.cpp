@@ -12,6 +12,7 @@ int main()
         List<int> List;
 
         std::cout<<"CHECKS IF INSERT METHODS, CONST ITERATOR WORKS \n \n";
+        std::cout << "asdasd";
         List.push_back(4);
         List.push_back(3);
         List.push_front(1);
