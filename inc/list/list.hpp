@@ -6,7 +6,7 @@
 #include <type_traits>
 
 template<class Type>
-class DoublyLinkedList
+class List
 {
 
     Node<Type>* head;
@@ -21,8 +21,8 @@ public:
     using Iterator = MyIterator<false>;
     using ConstIterator = MyIterator<true>;
 
-    DoublyLinkedList();
-    ~DoublyLinkedList();
+    List();
+    ~List();
     void insert(const Type& newElement, int index);
     void push_back(const Type& newElement);
     void push_front(const Type& newElement);
@@ -105,14 +105,14 @@ public:
 };
 
 template<class Type>
-DoublyLinkedList<Type>::DoublyLinkedList()
+List<Type>::List()
     :head(nullptr),
       tail(nullptr),
       size(0)
 {}
 
 template<class Type>
-DoublyLinkedList<Type>::~DoublyLinkedList()
+List<Type>::~List()
 {
     while(head)
     {
@@ -123,7 +123,7 @@ DoublyLinkedList<Type>::~DoublyLinkedList()
 }
 
 template<class Type>
-void DoublyLinkedList<Type>::insert(const Type &newElement, int index)
+void List<Type>::insert(const Type &newElement, int index)
 {
     if(index > size || index < 0) throw std::out_of_range("You want to get access to element that is out of range");
     else if(index == 0) push_front(newElement);
@@ -146,7 +146,7 @@ void DoublyLinkedList<Type>::insert(const Type &newElement, int index)
 
 
 template<class Type>
-void DoublyLinkedList<Type>::push_back(const Type &newElement)
+void List<Type>::push_back(const Type &newElement)
 {
     Node<Type>* node = new Node<Type>(newElement);
 
@@ -165,7 +165,7 @@ void DoublyLinkedList<Type>::push_back(const Type &newElement)
 }
 
 template<class Type>
-void DoublyLinkedList<Type>::push_front(const Type &newElement)
+void List<Type>::push_front(const Type &newElement)
 {
     Node<Type>* node = new Node<Type>(newElement);
 
@@ -184,7 +184,7 @@ void DoublyLinkedList<Type>::push_front(const Type &newElement)
 }
 
 template<class Type>
-Node<Type>* DoublyLinkedList<Type>::find(const Type &element) const
+Node<Type>* List<Type>::find(const Type &element) const
 {
     Node<Type>* current = head;
     while(current->value != element)
@@ -196,7 +196,7 @@ Node<Type>* DoublyLinkedList<Type>::find(const Type &element) const
 }
 
 template<class Type>
-void DoublyLinkedList<Type>::remove(const Type &element)
+void List<Type>::remove(const Type &element)
 {
     Node<Type>* toRemove = find(element);
     if(toRemove)
@@ -224,7 +224,7 @@ void DoublyLinkedList<Type>::remove(const Type &element)
 }
 
 template<class Type>
-Type& DoublyLinkedList<Type>::operator [](int index)
+Type& List<Type>::operator [](int index)
 {
     if(index >= size || index < 0) throw std::out_of_range("You want to get access to element that is out of range");
     else
@@ -238,25 +238,25 @@ Type& DoublyLinkedList<Type>::operator [](int index)
 }
 
 template<class Type>
-typename DoublyLinkedList<Type>::Iterator DoublyLinkedList<Type>::begin()
+typename List<Type>::Iterator List<Type>::begin()
 {
     return Iterator(head);
 }
 
 template<class Type>
-typename DoublyLinkedList<Type>::Iterator DoublyLinkedList<Type>::end()
+typename List<Type>::Iterator List<Type>::end()
 {
     return Iterator(tail->next);
 }
 
 template<class Type>
-typename DoublyLinkedList<Type>::ConstIterator DoublyLinkedList<Type>::cbegin() const
+typename List<Type>::ConstIterator List<Type>::cbegin() const
 {
     return ConstIterator(head);
 }
 
 template<class Type>
-typename DoublyLinkedList<Type>::ConstIterator DoublyLinkedList<Type>::cend() const
+typename List<Type>::ConstIterator List<Type>::cend() const
 {
     return ConstIterator(tail->next);
 }

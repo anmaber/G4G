@@ -7,43 +7,43 @@
 
 int main()
 {
-    /********  MY list **********/
+    /********  MY List **********/
     try{
-        list<int> list;
+        List<int> List;
 
         std::cout<<"CHECKS IF INSERT METHODS, CONST ITERATOR WORKS \n \n";
-        list.push_back(4);
-        list.push_back(3);
-        list.push_front(1);
-        list.push_front(2);
-        list.insert(9,2);
+        List.push_back(4);
+        List.push_back(3);
+        List.push_front(1);
+        List.push_front(2);
+        List.insert(9,2);
         std::cout<<"output should be: 2 1 9 4 3 \n";
         std::cout<<"real output: ";
 
-        for(auto it = list.cbegin(); it!=list.cend(); ++it)
+        for(auto it = List.cbegin(); it!=List.cend(); ++it)
             std::cout<<*it<<"  ";
 
 
         std::cout<<"\n\nCHECKS IF [] OPERATOR WORKS \n";
-        std::cout<<"list[3] = 0;"<<std::endl;
-        list[3] = 0;
-        for(auto it = list.cbegin(); it!=list.cend(); ++it)
+        std::cout<<"List[3] = 0;"<<std::endl;
+        List[3] = 0;
+        for(auto it = List.cbegin(); it!=List.cend(); ++it)
             std::cout<<*it<<"  ";
 
-        std::cout<<"\nlist[1] = "<<list[1]<<std::endl;
+        std::cout<<"\nList[1] = "<<List[1]<<std::endl;
 
         std::cout<<"\n\nCHECKS IF REMOVE METHOD WORKS \n";
-        list.remove(2);
-        for(auto it = list.cbegin(); it!=list.cend(); ++it)
+        List.remove(2);
+        for(auto it = List.cbegin(); it!=List.cend(); ++it)
             std::cout<<*it<<"  ";
 
 
         std::cout<<"\n\nCHECKS IF ITERATOR WORKS (TO EACH ELEMENT OF COLLECTION SHOULD BE ADDED 2) \n";
-        for(auto it =list.begin() ; it != list.end(); ++it)
+        for(auto it =List.begin() ; it != List.end(); ++it)
             *it+=2;
 
 
-        for(auto it = list.cbegin(); it!=list.cend(); ++it)
+        for(auto it = List.cbegin(); it!=List.cend(); ++it)
             std::cout<<*it<<"  ";
 
     }
@@ -54,31 +54,31 @@ int main()
 
     /****** STL *****/
 
-    std::list<int> list;
-    list.push_back(4);
-    list.push_back(3);
-    list.push_front(1);
-    list.push_front(2);
-    auto it = list.begin();
+    std::list<int> List;
+    List.push_back(4);
+    List.push_back(3);
+    List.push_front(1);
+    List.push_front(2);
+    auto it = List.begin();
     std::advance(it,2);
-    list.insert(it,9);
+    List.insert(it,9);
 
     std::cout<<"\n\nCHECKS HOW INSERT METHODS IN STL WORK \n \n";
     std::cout<<"output should be: 2 1 9 4 3 \n";
     std::cout<<"real output: ";
 
-    std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::copy(List.begin(), List.end(), std::ostream_iterator<int>(std::cout, " "));
 
     std::cout<<"\n\nCHECKS HOW ITERATOR WORKS (TO EACH ELEMENT OF COLLECTION SHOULD BE ADDED 2) \n";
 
-    for(auto it =list.begin() ; it != list.end(); ++it)
+    for(auto it =List.begin() ; it != List.end(); ++it)
         *it+=2;
 
-    std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::copy(List.begin(), List.end(), std::ostream_iterator<int>(std::cout, " "));
 
     std::cout<<"\n\nCHECKS HOE REMOVE METHOD WORKS \n";
-    list.remove(4);
-    std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
+    List.remove(4);
+    std::copy(List.begin(), List.end(), std::ostream_iterator<int>(std::cout, " "));
 
 
     return 0;
