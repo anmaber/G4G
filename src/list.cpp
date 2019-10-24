@@ -23,6 +23,7 @@ int main()
 
         for(auto it = List.cbegin(); it!=List.cend(); ++it)
             std::cout<<*it<<"  ";
+        std::cout << "SImea";
 
 
         std::cout<<"\n\nCHECKS IF [] OPERATOR WORKS \n";
