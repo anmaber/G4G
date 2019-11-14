@@ -5,8 +5,8 @@ class Node
 {
 public:
     Node(const Type& v);
-    Node* next;
     Node* previous;
+    Node* next;
     Type value;
 };
 
