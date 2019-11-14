@@ -1,6 +1,6 @@
 #pragma once
 
-template<class Type>
+template<typename Type>
 class Node
 {
 public:
@@ -10,7 +10,7 @@ public:
     Type value;
 };
 
-template<class Type>
+template<typename Type>
 Node<Type>::Node(const Type& v)
      :next(nullptr),
       previous(nullptr),

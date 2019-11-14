@@ -6,7 +6,7 @@
 #include <type_traits>
 #include <cstddef>
 
-template<class Type>
+template<typename Type>
 class List
 {
 
@@ -99,14 +99,14 @@ public:
     };
 };
 
-template<class Type>
+template<typename Type>
 List<Type>::List()
     :head(nullptr),
       tail(nullptr),
       size(0)
 {}
 
-template<class Type>
+template<typename Type>
 List<Type>::~List()
 {
     while(head)
@@ -117,7 +117,7 @@ List<Type>::~List()
     }
 }
 
-template<class Type>
+template<typename Type>
 void List<Type>::insert(const Type &newElement, int index)
 {
     if(index > size || index < 0) throw std::out_of_range("You want to get access to element that is out of range");
@@ -140,7 +140,7 @@ void List<Type>::insert(const Type &newElement, int index)
 }
 
 
-template<class Type>
+template<typename Type>
 void List<Type>::push_back(const Type &newElement)
 {
     Node<Type>* node = new Node<Type>(newElement);
@@ -159,7 +159,7 @@ void List<Type>::push_back(const Type &newElement)
     size++;
 }
 
-template<class Type>
+template<typename Type>
 void List<Type>::push_front(const Type &newElement)
 {
     Node<Type>* node = new Node<Type>(newElement);
@@ -178,7 +178,7 @@ void List<Type>::push_front(const Type &newElement)
     size++;
 }
 
-template<class Type>
+template<typename Type>
 Node<Type>* List<Type>::find(const Type &element) const
 {
     Node<Type>* current = head;
@@ -190,7 +190,7 @@ Node<Type>* List<Type>::find(const Type &element) const
     return current;
 }
 
-template<class Type>
+template<typename Type>
 void List<Type>::remove(const Type &element)
 {
     Node<Type>* toRemove = find(element);
@@ -218,7 +218,7 @@ void List<Type>::remove(const Type &element)
     }
 }
 
-template<class Type>
+template<typename Type>
 Type& List<Type>::operator [](int index)
 {
     if(index >= size || index < 0) throw std::out_of_range("You want to get access to element that is out of range");
@@ -232,25 +232,25 @@ Type& List<Type>::operator [](int index)
     }
 }
 
-template<class Type>
+template<typename Type>
 typename List<Type>::Iterator List<Type>::begin()
 {
     return Iterator(head);
 }
 
-template<class Type>
+template<typename Type>
 typename List<Type>::Iterator List<Type>::end()
 {
     return Iterator(tail->next);
 }
 
-template<class Type>
+template<typename Type>
 typename List<Type>::ConstIterator List<Type>::cbegin() const
 {
     return ConstIterator(head);
 }
 
-template<class Type>
+template<typename Type>
 typename List<Type>::ConstIterator List<Type>::cend() const
 {
     return ConstIterator(tail->next);
