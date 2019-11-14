@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <type_traits>
+#include <cstddef>
 
 template<class Type>
 class List
@@ -11,7 +12,7 @@ class List
 
     Node<Type>* head;
     Node<Type>* tail;
-    int size;
+    std::size_t size;
 
 public:
 
