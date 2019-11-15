@@ -12,12 +12,11 @@ namespace
     const int hashingNumber = 100;
 }
 
-template<typename keyType>
-int hash(const keyType& key)
+template<typename KeyType>
+int hash(const KeyType& key)
 {
     return key % hashingNumber;
 }
-
 
 template <>
 int hash(const std::string& key)
@@ -30,25 +29,23 @@ int hash(const std::string& key)
     return hash % hashingNumber;
 }
 
-template<typename keyType, typename valType>
+template<typename KeyType, typename ValType>
 class Map{
 
-    std::vector<valType> vector;
+    std::vector<ValType> vector;
 public:
     Map();
-    void insert(const keyType& key, const valType& value);
-    void remove(const keyType& key);
-    valType& operator [] (const keyType& key);
+    void insert(const KeyType& key, const ValType& value);
+    void remove(const KeyType& key);
+    ValType& operator [] (const KeyType& key);
 
 };
 
-
-
-template<typename keyType, typename valType>
-Map<keyType,valType>::Map()
+template<typename KeyType, typename ValType>
+Map<KeyType,ValType>::Map()
 {
-    if (!(std::is_same<keyType,std::string>::value
-          || std::is_same<keyType,int>::value))
+    if (!(std::is_same<KeyType,std::string>::value
+          || std::is_same<KeyType,int>::value))
     {
         throw std::invalid_argument("you've chosen wrong type of key");
     }
@@ -56,22 +53,22 @@ Map<keyType,valType>::Map()
 }
 
 
-template<typename keyType, typename valType>
-void Map<keyType,valType>::insert(const keyType& key, const valType& value)
+template<typename KeyType, typename ValType>
+void Map<KeyType,ValType>::insert(const KeyType& key, const ValType& value)
 {
-    vector[hash<keyType>(key)] = value;
+    vector[hash<KeyType>(key)] = value;
 }
 
-template<typename keyType, typename valType>
-void Map<keyType,valType>::remove(const keyType &key)
+template<typename KeyType, typename ValType>
+void Map<KeyType,ValType>::remove(const KeyType &key)
 {
     auto iter = vector.begin();
-    std::advance(iter,hash<keyType>(key));
+    std::advance(iter,hash<KeyType>(key));
     vector.erase(iter);
 }
 
-template<typename keyType, typename valType>
-valType& Map<keyType,valType>::operator [](const keyType& key)
+template<typename KeyType, typename ValType>
+ValType& Map<KeyType,ValType>::operator [](const KeyType& key)
 {
-   return vector[hash<keyType>(key)];
+   return vector[hash<KeyType>(key)];
 }
