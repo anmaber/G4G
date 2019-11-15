@@ -56,7 +56,7 @@ Map<KeyType,ValType>::Map()
 template<typename KeyType, typename ValType>
 void Map<KeyType,ValType>::insert(const KeyType& key, const ValType& value)
 {
-    vector[hash<KeyType>(key)] = value;
+    vector.at(hash<KeyType>(key)) = value;
 }
 
 template<typename KeyType, typename ValType>
@@ -70,5 +70,5 @@ void Map<KeyType,ValType>::remove(const KeyType &key)
 template<typename KeyType, typename ValType>
 ValType& Map<KeyType,ValType>::operator [](const KeyType& key)
 {
-   return vector[hash<KeyType>(key)];
+   return vector.at(hash<KeyType>(key));
 }
