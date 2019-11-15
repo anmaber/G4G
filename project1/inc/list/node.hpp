@@ -12,7 +12,7 @@ public:
 
 template<typename Type>
 Node<Type>::Node(const Type& v)
-     :next(nullptr),
-      previous(nullptr),
+     :previous(nullptr),
+      next(nullptr),
       value(v)
 {}

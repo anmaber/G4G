@@ -7,11 +7,17 @@
 #include <type_traits>
 #include <vector>
 
+namespace
+{
+    const int hashingNumber = 100;
+}
+
 template<typename keyType>
 int hash(const keyType& key)
 {
-    return key % 100;
+    return key % hashingNumber;
 }
+
 
 template <>
 int hash(const std::string& key)
@@ -21,14 +27,13 @@ int hash(const std::string& key)
     {
         hash+=letter;
     }
-    return hash % 100;
+    return hash % hashingNumber;
 }
 
 template<typename keyType, typename valType>
 class Map{
 
     std::vector<valType> vector;
-
 public:
     Map();
     void insert(const keyType& key, const valType& value);

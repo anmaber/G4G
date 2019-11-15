@@ -24,12 +24,12 @@ public:
 
     List();
     ~List();
-    void insert(const Type& newElement, int index);
+    void insert(const Type& newElement,unsigned int index);
     void push_back(const Type& newElement);
     void push_front(const Type& newElement);
     Node<Type>* find(const Type& element) const;
     void remove(const Type& element);
-    Type& operator [] (int index);
+    Type& operator [] (unsigned int index);
 
     Iterator begin();
     Iterator end();
@@ -118,7 +118,7 @@ List<Type>::~List()
 }
 
 template<typename Type>
-void List<Type>::insert(const Type &newElement, int index)
+void List<Type>::insert(const Type &newElement,unsigned int index)
 {
     if(index > size || index < 0) throw std::out_of_range("You want to get access to element that is out of range");
     else if(index == 0) push_front(newElement);
@@ -127,7 +127,7 @@ void List<Type>::insert(const Type &newElement, int index)
     {
         Node<Type>* node = new Node<Type>(newElement);
         Node<Type>* current = head;
-        for(int i=0; i<index-1; ++i)
+        for(unsigned int i=0; i<index-1; ++i)
             current=current->next;
 
         current->next->previous = node;
@@ -219,13 +219,13 @@ void List<Type>::remove(const Type &element)
 }
 
 template<typename Type>
-Type& List<Type>::operator [](int index)
+Type& List<Type>::operator [](unsigned int index)
 {
     if(index >= size || index < 0) throw std::out_of_range("You want to get access to element that is out of range");
     else
     {
         Node<Type>* current = head;
-        for(int i = 0; i < index; ++i)
+        for(unsigned int i = 0; i < index; ++i)
             current=current->next;
 
         return current->value;

@@ -23,7 +23,6 @@ int main()
         for(auto it = list.cbegin(); it!=list.cend(); ++it)
             std::cout<<*it<<"  ";
 
-
         std::cout<<"\n\nCHECKS IF [] OPERATOR WORKS \n";
         std::cout<<"list[3] = 0;"<<std::endl;
         list[3] = 0;
