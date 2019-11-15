@@ -1,10 +1,11 @@
 #pragma once
+
+#include <algorithm>
+#include <iostream>
 #include <string>
 #include <stdexcept>
-#include <iostream>
-#include <vector>
 #include <type_traits>
-#include <algorithm>
+#include <vector>
 
 template<typename keyType>
 int hash(const keyType& key)
