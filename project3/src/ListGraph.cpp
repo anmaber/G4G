@@ -9,49 +9,45 @@ ListGraph::ListGraph(int vertexNumber, int begin)
     : Graph(vertexNumber,begin)
 {
     adjacency_.resize(vertexNumber);
-
 }
 
 void ListGraph::addVertex(int vertex, int neighbour, int pathCost)
 {
-    adjacency_[vertex].emplace_back(std::make_pair(neighbour,pathCost));
-    adjacency_[neighbour].emplace_back(std::make_pair(vertex,pathCost));
-
+    adjacency_[vertex].emplace_back(Neighbour(neighbour,pathCost));
+    adjacency_[neighbour].emplace_back(Neighbour(vertex,pathCost));
 }
 
-
-using Edge = std::pair<int,int>;
-using EdgeVector = std::vector<Edge>;
+using EdgeVector = std::vector<Neighbour>;
 
 
 void ListGraph::dijkstra()
 {
-    std::priority_queue<Edge, EdgeVector,std::greater<Edge>> costVertexPq;
+    std::priority_queue<Neighbour,EdgeVector,std::greater<Neighbour>> costVertexPq;
 
-    costVertexPq.push(std::make_pair(0, begin_));
+int begin = begin_;
+    costVertexPq.push(Neighbour(0, begin));
     distances_[begin_] = 0;
 
     while(!costVertexPq.empty())
     {
-        int smallestCost = costVertexPq.top().second;
+        int smallestCost = costVertexPq.top().cost;
         costVertexPq.pop();
 
         if(!adjacency_[smallestCost].empty())
         {
             for(const auto& neighbour : adjacency_[smallestCost])
             {
-                int vertex = neighbour.first;
-                int cost = neighbour.second;
+ //               int vertex = neighbour.first;
+   //             int cost = neighbour.second;
 
-                if (distances_[vertex] > distances_[smallestCost] + cost)
+                if (distances_[neighbour.vertex] > distances_[smallestCost] + neighbour.cost)
                 {
-                    distances_[vertex] = distances_[smallestCost] + cost;
-                    costVertexPq.push(std::make_pair(distances_[vertex], vertex));
-                    previous_[vertex] = smallestCost;
+                    distances_[neighbour.vertex] = distances_[smallestCost] + neighbour.cost;
+                    costVertexPq.push(Neighbour(distances_[neighbour.vertex], neighbour.vertex));
+                    previous_[neighbour.vertex] = smallestCost;
                 }
             }
         }
-
     }
 }
 
@@ -85,22 +81,16 @@ void ListGraph::initializeAdjacency()
     if(!adjacency_.empty()) adjacency_.clear();
 
     adjacency_.resize(vertexNumber_);
-    //std::cout<<__FUNCTION__<<std::endl;
 }
 
 void ListGraph::randomizeEdges(std::vector<Edge>& possibleEdges, int edgesNumber)
 {
     for (int i = 0; i < edgesNumber; ++i)
     {
-        //std::cout<<i <<"ok"<<std::endl;
         int cost = std::rand() % 50 +1;
         int edgeIndex = std::rand() % possibleEdges.size();
-        //std::cout<<possibleEdges.size()<<std::endl;
-       // std::cout<<edgeIndex<<std::endl;
-
 
         Edge e = possibleEdges.at(edgeIndex);
-       // std::cout<<"ok";
         auto toRemove = possibleEdges.begin()+edgeIndex;
         possibleEdges.erase(toRemove);
         adjacency_[e.first].emplace_back(std::make_pair(e.second,cost));
