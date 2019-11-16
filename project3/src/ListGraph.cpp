@@ -51,11 +51,17 @@ int begin = begin_;
     }
 }
 
+namespace
+{
+const int range = 50;
+const int changeRangeByOne = 1;
+}
+
 void ListGraph::bellmanFord()
 {
     distances_[begin_] = 0;
 
-    for (int i = 0; i < vertexNumber_-1; ++i)
+    for (int i = 0; i < vertexNumber_ - changeRangeByOne; ++i)
     {
         for (int j = 0; j < vertexNumber_; ++j)
         {
@@ -87,7 +93,7 @@ void ListGraph::randomizeEdges(std::vector<Edge>& possibleEdges, int edgesNumber
 {
     for (int i = 0; i < edgesNumber; ++i)
     {
-        int cost = std::rand() % 50 +1;
+        int cost = std::rand() % range + changeRangeByOne;
         int edgeIndex = std::rand() % possibleEdges.size();
 
         Edge e = possibleEdges.at(edgeIndex);
