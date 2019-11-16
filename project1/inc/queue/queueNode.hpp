@@ -4,10 +4,9 @@ template<class Type>
 class QueueNode{
 
 public:
-    QueueNode(const Type& v);
+    explicit QueueNode(const Type& v);
     QueueNode<Type>* next;
     Type value;
-
 };
 
 template<class Type>
