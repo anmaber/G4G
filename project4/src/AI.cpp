@@ -16,7 +16,7 @@ const int rangeDivider = 2;
 const int evaluationIncreaser = 1;
 }
 
-int AI::minimax(Board &board, int depth, bool isMax, int x, int y,char player,int alpha, int beta)
+int AI::minimax(Board &board, int depth, bool isMax, int x, int y, char player, int alpha, int beta)
 {
     if(depth == maxDepth || board.isFull() || board.checkWinner(x,y,player))
     {
