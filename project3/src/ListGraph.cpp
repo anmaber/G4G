@@ -13,19 +13,19 @@ ListGraph::ListGraph(int vertexNumber, int begin)
 
 void ListGraph::addVertex(int vertex, int neighbour, int pathCost)
 {
-    adjacency_[vertex].emplace_back(Neighbour(neighbour,pathCost));
-    adjacency_[neighbour].emplace_back(Neighbour(vertex,pathCost));
+    adjacency_[vertex].emplace_back(Edge(neighbour,pathCost));
+    adjacency_[neighbour].emplace_back(Edge(vertex,pathCost));
 }
 
-using EdgeVector = std::vector<Neighbour>;
+using EdgeVector = std::vector<Edge>;
 
 
 void ListGraph::dijkstra()
 {
-    std::priority_queue<Neighbour,EdgeVector,std::greater<Neighbour>> costVertexPq;
+    std::priority_queue<Edge,EdgeVector,std::greater<Edge>> costVertexPq;
 
 int begin = begin_;
-    costVertexPq.push(Neighbour(0, begin));
+    costVertexPq.push(Edge(0, begin));
     distances_[begin_] = 0;
 
     while(!costVertexPq.empty())
@@ -37,13 +37,10 @@ int begin = begin_;
         {
             for(const auto& neighbour : adjacency_[smallestCost])
             {
- //               int vertex = neighbour.first;
-   //             int cost = neighbour.second;
-
                 if (distances_[neighbour.vertex] > distances_[smallestCost] + neighbour.cost)
                 {
                     distances_[neighbour.vertex] = distances_[smallestCost] + neighbour.cost;
-                    costVertexPq.push(Neighbour(distances_[neighbour.vertex], neighbour.vertex));
+                    costVertexPq.push(Edge(distances_[neighbour.vertex], neighbour.vertex));
                     previous_[neighbour.vertex] = smallestCost;
                 }
             }
@@ -67,13 +64,13 @@ void ListGraph::bellmanFord()
         {
             if(!adjacency_[j].empty())
             {
-                for (auto& n : adjacency_[j])
+                for (const auto& n : adjacency_[j])
                 {
 
-                    if (distances_[n.first] > n.second + distances_[j] && distances_[j]!=INT_MAX)
+                    if (distances_[n.vertex] > n.cost + distances_[j] && distances_[j]!=INT_MAX)
                     {
-                        distances_[n.first] = n.second + distances_[j];
-                        previous_[n.first] = j;
+                        distances_[n.vertex] = n.cost + distances_[j];
+                        previous_[n.vertex] = j;
                     }
                 }
             }
@@ -99,9 +96,7 @@ void ListGraph::randomizeEdges(std::vector<Edge>& possibleEdges, int edgesNumber
         Edge e = possibleEdges.at(edgeIndex);
         auto toRemove = possibleEdges.begin()+edgeIndex;
         possibleEdges.erase(toRemove);
-        adjacency_[e.first].emplace_back(std::make_pair(e.second,cost));
-        adjacency_[e.second].emplace_back(std::make_pair(e.first,cost));
+        adjacency_[e.vertex].emplace_back(Edge(e.cost,cost));
+        adjacency_[e.cost].emplace_back(Edge(e.vertex,cost));
     }
-
-
 }

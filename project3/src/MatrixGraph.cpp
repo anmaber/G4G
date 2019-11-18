@@ -12,29 +12,26 @@ MatrixGraph::MatrixGraph(int vertexNumber, int begin)
     {
         a.resize(vertexNumber,INT_MAX);
     }
-
 }
 
 void MatrixGraph::addVertex(int vertex, int neighbourNumber, int pathCost)
 {
     adjacency_[vertex][neighbourNumber] = pathCost;
     adjacency_[neighbourNumber][vertex] = pathCost;
-
 }
 
-using Edge = std::pair<int,int>;
 using EdgeVector = std::vector<Edge>;
 
 void MatrixGraph::dijkstra()
 {
     std::priority_queue<Edge, EdgeVector,std::greater<Edge>> costVertexPq;
 
-    costVertexPq.push(std::make_pair(0, begin_));
+    costVertexPq.push(Edge(0, begin_));
     distances_[begin_] = 0;
 
     while(!costVertexPq.empty())
     {
-        int smallestCost = costVertexPq.top().second;
+        int smallestCost = costVertexPq.top().cost;
         costVertexPq.pop();
 
         for(int i = 0; i < vertexNumber_; ++i)
@@ -46,18 +43,24 @@ void MatrixGraph::dijkstra()
             if (distances_[vertex] > distances_[smallestCost] + cost)
             {
                 distances_[vertex] = distances_[smallestCost] + cost;
-                costVertexPq.push(std::make_pair(distances_[vertex], vertex));
+                costVertexPq.push(Edge(distances_[vertex], vertex));
                 previous_[vertex] = smallestCost;
             }
         }
     }
 }
 
+namespace
+{
+const int range = 50;
+const int changeRangeByOne = 1;
+}
+
 void MatrixGraph::bellmanFord()
 {
     distances_[begin_] = 0;
 
-    for(int i = 0; i < vertexNumber_ - 1; ++i)
+    for(int i = 0; i < vertexNumber_ - changeRangeByOne; ++i)
     {
         for(int j = 0; j < vertexNumber_; ++j)
         {
@@ -71,7 +74,6 @@ void MatrixGraph::bellmanFord()
             }
         }
     }
-
 }
 
 void MatrixGraph::initializeAdjacency()
@@ -89,12 +91,12 @@ void MatrixGraph::randomizeEdges(std::vector<Edge> &possibleEdges, int edgesNumb
 {
     for (int i = 0; i < edgesNumber; ++i)
     {
-        int cost = std::rand() % 50 +1;
+        int cost = std::rand() % range + changeRangeByOne;
         int edgeIndex = std::rand() % possibleEdges.size();
         Edge e = possibleEdges[edgeIndex];
         auto toRemove = possibleEdges.begin()+edgeIndex;
         possibleEdges.erase(toRemove);
-        adjacency_[e.first][e.second] = cost;
-        adjacency_[e.second][e.first] = cost;
+        adjacency_[e.vertex][e.cost] = cost;
+        adjacency_[e.cost][e.vertex] = cost;
     }
 }

@@ -4,7 +4,21 @@
 #include <map>
 #include <string>
 
-using Edge = std::pair<int,int>;
+struct Edge
+{
+    int vertex;
+    int cost;
+
+    Edge(int v,int c)
+        : vertex(v),
+          cost(c)
+    {}
+};
+
+bool operator>(Edge const& x, Edge const& y)
+{
+    return x.cost > y.cost;
+}
 
 class Graph
 {

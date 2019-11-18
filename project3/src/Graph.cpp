@@ -75,7 +75,7 @@ void Graph::GenerateRandom(int size, double density)
     {
         for (int j = i + 1; j < vertexNumber_; ++j)
         {
-            possibleEdges.emplace_back(std::make_pair(i,j));
+            possibleEdges.emplace_back(Edge(i,j));
         }
     }
 

@@ -2,9 +2,7 @@
 
 #include "Graph.hpp"
 
-struct Neighbour { int vertex; int cost; };
-
-using AdjacencyList = std::vector<std::vector<Neigbour>>;
+using AdjacencyList = std::vector<std::vector<Edge>>;
 
 class ListGraph : public Graph
 {
