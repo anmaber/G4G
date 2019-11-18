@@ -66,10 +66,10 @@ int AI::minimax(Board &board, int depth, bool isMax, int x, int y, char player, 
     return best;
 }
 
-std::pair<int, int> AI::findBestMove(Board &board)
+Coordinates AI::findBestMove(Board &board)
 {
     int bestValue = std::numeric_limits<int>::min();
-    std::pair<int,int> bestMove = std::make_pair(startingPosition,startingPosition);
+    Coordinates bestMove = Coordinates(startingPosition,startingPosition);
     for(int i = 0; i < board.getSize(); ++i)
     {
         for(int j = 0; j < board.getSize(); ++j)
@@ -83,7 +83,7 @@ std::pair<int, int> AI::findBestMove(Board &board)
 
                 if(moveValue > bestValue)
                 {
-                    bestMove = std::make_pair(i,j);
+                    bestMove = Coordinates(i,j);
                     bestValue = moveValue;
                 }
             }
@@ -92,10 +92,10 @@ std::pair<int, int> AI::findBestMove(Board &board)
     return bestMove;
 }
 
-std::pair<int, int> AI::move(Board &board)
+Coordinates AI::move(Board &board)
 {
-    std::pair<int,int> coordinates = findBestMove(board);
-    board.putOnBoard(coordinates.first,coordinates.second,getSign());
+    Coordinates coordinates = findBestMove(board);
+    board.putOnBoard(coordinates.x,coordinates.y,getSign());
     return coordinates;
 }
 

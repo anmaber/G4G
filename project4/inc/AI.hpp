@@ -3,7 +3,7 @@
 
 class AI : public Player
 {
-    std::pair<int,int> findBestMove(Board& board);
+    Coordinates findBestMove(Board& board);
     int minimax(Board& board, int depth, bool isMax, int x, int y, char player, int alpha, int beta);
     int evaluateBoard(const Board& board, int xCoordinate, int yCoordinate, char currentPlayer) const;
     int evaluateVertically(const Board& board, int xCoordinate, int yCoordinate, char currentPlayer) const;
@@ -15,6 +15,6 @@ public:
 
     AI() = default;
     explicit AI(char sign);
-    std::pair<int,int> move(Board& board);
+    Coordinates move(Board& board);
 
 };

@@ -21,10 +21,10 @@ void Game::play()
 
     while(!finished)
     {
-        std::pair<int,int> coordinates = currentPlayer_->move(board_);
+        Coordinates coordinates = currentPlayer_->move(board_);
 
-        currentXCoordinate_ = coordinates.first;
-        currentYCoordinate_ = coordinates.second;
+        currentXCoordinate_ = coordinates.x;
+        currentYCoordinate_ = coordinates.y;
 
         std:: cout << "\033[2J\033[1;1H";
 

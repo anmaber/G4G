@@ -10,19 +10,19 @@ char Player::getSign() const
     return sign_;
 }
 
-std::pair<int,int> Player::move(Board &board)
+Coordinates Player::move(Board &board)
 {
-    std::pair<int,int> coordinates = std::make_pair(0,0);
+    Coordinates coordinates = Coordinates(0,0);
     do
     {
        coordinates = setCoordinates(board.getSize());
 
-    }while(!board.putOnBoard(coordinates.first,coordinates.second,getSign()));
+    }while(!board.putOnBoard(coordinates.x,coordinates.y,getSign()));
 
     return coordinates;
 }
 
-std::pair<int, int> Player::setCoordinates(int max)
+Coordinates Player::setCoordinates(int max)
 {
     int x=0,y=0;
     std::cout<<"Row: ";
@@ -41,7 +41,7 @@ std::pair<int, int> Player::setCoordinates(int max)
         std::cin >> y;
     }
 
-    return std::make_pair(x,y);
+    return Coordinates(x,y);
 }
 
 bool Player::operator == (const Player &p)
