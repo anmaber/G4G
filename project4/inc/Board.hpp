@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 using Fields = std::vector<std::vector<char>>;
 
@@ -21,7 +22,7 @@ public:
     Board() = delete;
     Board(int size, int winningNumber);
     Fields getFields() const;
-    void printBoard() const;
+    std::string printBoard() const;
     int getSize() const;
     int getWinningNumber() const;
     bool isFull() const;

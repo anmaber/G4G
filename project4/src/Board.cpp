@@ -1,5 +1,6 @@
 #include "Board.hpp"
 #include <iostream>
+#include <sstream>
 
 Board::Board(int size,int winningNumber)
     : size_(size),
@@ -17,20 +18,22 @@ Fields Board::getFields() const
     return fields_;
 }
 
-void Board::printBoard() const
+std::string Board::printBoard() const
 {
-    std::cout<<"TIC TAC TOE!\n";
-    std::cout<<" |";
+    std::stringstream ss;
+    ss << "TIC TAC TOE!\n";
+    ss << " |";
     for(int i = 0; i < size_; ++i)
-        std::cout<< i <<"|";
-    std::cout<<"\n";
+        ss << i <<"|";
+    ss <<"\n";
     for(int i = 0; i < size_; ++i)
     {
-        std::cout<<i<<"|";
+        ss <<i<<"|";
         for(int j =0; j < size_; ++j)
-            std::cout<<fields_[i][j]<<"|";
-        std::cout<<"\n";
+            ss << fields_[i][j]<<"|";
+        ss << "\n";
     }
+    return ss.str();
 }
 
 int Board::getSize() const

@@ -17,7 +17,7 @@ void Game::play()
     int turn = 0 ;
     bool finished = false;
 
-    board_.printBoard();
+    std::cout << board_.printBoard();
 
     while(!finished)
     {
@@ -28,7 +28,7 @@ void Game::play()
 
         std:: cout << "\033[2J\033[1;1H";
 
-        board_.printBoard();
+        std::cout << board_.printBoard();
         if(isCurrentPlayerWinner())
         {
             std::cout <<currentPlayer_->getSign()<< " WON! \n";
