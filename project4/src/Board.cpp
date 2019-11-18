@@ -55,8 +55,8 @@ bool Board::putOnBoard(int xCoordinate, int yCoordinate, char currentPlayer)
 
 bool Board::checkWinnerVertically(int xCoordinate, int yCoordinate, char currentPlayer) const
 {
-    int start =0, end = size_ -1;
-    if(yCoordinate - winningNumber_ +1 >= 0 ) start = yCoordinate - winningNumber_ +1;
+    int start = 0, end = size_ - 1;
+    if(yCoordinate - winningNumber_ + 1 >= 0 ) start = yCoordinate - winningNumber_ + 1;
     if(yCoordinate + winningNumber_ - 1 <= end) end = yCoordinate + winningNumber_ - 1;
     int counter = 0;
     for(int i = start; i <= end; ++i)
@@ -70,8 +70,8 @@ bool Board::checkWinnerVertically(int xCoordinate, int yCoordinate, char current
 
 bool Board::checkWinnerHorizontally(int xCoordinate, int yCoordinate,char currentPlayer) const
 {
-    int start =0, end = size_ -1;
-    if(xCoordinate - winningNumber_ +1 >= 0 ) start = xCoordinate - winningNumber_ +1;
+    int start = 0, end = size_ - 1;
+    if(xCoordinate - winningNumber_ +1 >= 0 ) start = xCoordinate - winningNumber_ + 1;
     if(xCoordinate + winningNumber_ - 1 <= end) end = xCoordinate + winningNumber_ - 1;
 
     int counter = 0;
@@ -87,9 +87,9 @@ bool Board::checkWinnerHorizontally(int xCoordinate, int yCoordinate,char curren
 bool Board::checkWinnerDiagonally(int xCoordinate, int yCoordinate,char currentPlayer) const
 {
     int startX, endX, startY, endY;
-    startX = xCoordinate - winningNumber_ +1;
+    startX = xCoordinate - winningNumber_ + 1;
     endX = xCoordinate + winningNumber_ - 1;
-    startY = yCoordinate - winningNumber_ +1;
+    startY = yCoordinate - winningNumber_ + 1;
     endY = yCoordinate + winningNumber_ - 1;
 
     while(startX < 0 || startY < 0)
@@ -118,9 +118,9 @@ bool Board::checkWinnerDiagonally(int xCoordinate, int yCoordinate,char currentP
 bool Board::checkWinnerAntiDiagonally(int xCoordinate, int yCoordinate,char currentPlayer) const
 {
     int startX, endX, startY, endY;
-    startX = xCoordinate + winningNumber_ -1;
+    startX = xCoordinate + winningNumber_ - 1;
     endX = xCoordinate - winningNumber_ + 1;
-    startY = yCoordinate - winningNumber_ +1;
+    startY = yCoordinate - winningNumber_ + 1;
     endY = yCoordinate + winningNumber_ - 1;
 
     while (startX >= size_ || startY < 0)
@@ -166,7 +166,7 @@ bool Board::isFull() const
     {
         for(int j = 0; j< getSize(); ++j)
         {
-            if(fields_[i][j]== ' ') return false;
+            if(fields_[i][j] == ' ') return false;
         }
     }
     return true;

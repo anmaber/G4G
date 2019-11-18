@@ -38,7 +38,7 @@ int AI::minimax(Board &board, int depth, bool isMax, int x, int y,char player,in
                 {
                     board.putOnBoard(i,j,'O');
                     best = std::max(best,minimax(board,depth,!isMax,i,j,'O',alpha,beta));
-                    alpha =std::max(best,alpha);
+                    alpha = std::max(best,alpha);
                     board.eraseField(i,j);
                 }
                 if(alpha >= beta) break;
@@ -114,19 +114,19 @@ int AI::evaluateBoard(const Board &board, int xCoordinate, int yCoordinate, char
 
 int AI::evaluateVertically(const Board &board, int xCoordinate, int yCoordinate, char currentPlayer) const
 {
-    int start =0, end = board.getSize()-changeRange;
-    if(yCoordinate - board.getWinningNumber() +changeRange >= 0 ) start = yCoordinate - board.getWinningNumber() +changeRange;
+    int start = 0, end = board.getSize()-changeRange;
+    if(yCoordinate - board.getWinningNumber() + changeRange >= 0 ) start = yCoordinate - board.getWinningNumber() + changeRange;
     if(yCoordinate + board.getWinningNumber() - changeRange <= end) end = yCoordinate + board.getWinningNumber() - changeRange;
     int counterTop = 0, counterBottom = 0;
     int opponentCounterTop = 0, opponentCounterBottom = 0;
     for(int i = start; i < yCoordinate; ++i)
     {
-        if (board.getFields()[xCoordinate][i]==currentPlayer)
+        if (board.getFields()[xCoordinate][i] == currentPlayer)
         {
             counterBottom++;
             opponentCounterBottom = 0;
         }
-        else if (board.getFields()[xCoordinate][i]== ' ');
+        else if (board.getFields()[xCoordinate][i] == ' ');
         else
         {
             opponentCounterBottom++;
@@ -136,27 +136,27 @@ int AI::evaluateVertically(const Board &board, int xCoordinate, int yCoordinate,
 
     for(int i = end; i > yCoordinate; --i)
     {
-        if (board.getFields()[xCoordinate][i]==currentPlayer)
+        if (board.getFields()[xCoordinate][i] == currentPlayer)
         {
             counterTop++;
             opponentCounterTop = 0;
         }
-        else if (board.getFields()[xCoordinate][i]== ' ');
+        else if (board.getFields()[xCoordinate][i] == ' ');
         else
         {
             opponentCounterTop++;
             counterTop = 0;
         }
     }
-    if(opponentCounterBottom+opponentCounterTop == board.getWinningNumber() - changeRange) return 1000;
-    if(counterBottom+counterTop== board.getWinningNumber() - changeRange) return 100;
+    if(opponentCounterBottom + opponentCounterTop == board.getWinningNumber() - changeRange) return 1000;
+    if(counterBottom + counterTop == board.getWinningNumber() - changeRange) return 100;
     return counterBottom+counterTop;
 }
 
 int AI::evaluateHorizontally(const Board &board, int xCoordinate, int yCoordinate, char currentPlayer) const
 {
-    int start =0, end = board.getSize() -changeRange;
-    if(xCoordinate - board.getWinningNumber() +changeRange >= 0 ) start = xCoordinate -  board.getWinningNumber() +changeRange;
+    int start = 0, end = board.getSize() - changeRange;
+    if(xCoordinate - board.getWinningNumber() + changeRange >= 0 ) start = xCoordinate -  board.getWinningNumber() +changeRange;
     if(xCoordinate +  board.getWinningNumber() - changeRange <= end) end = xCoordinate + board.getWinningNumber() - changeRange;
 
     int counterLeft = 0, counterRight = 0;
@@ -164,12 +164,12 @@ int AI::evaluateHorizontally(const Board &board, int xCoordinate, int yCoordinat
 
     for(int i = start; i < xCoordinate; ++i)
     {
-        if (board.getFields()[i][yCoordinate]==currentPlayer)
+        if (board.getFields()[i][yCoordinate] == currentPlayer)
         {
             counterLeft++;
             opponentCounterLeft = 0;
         }
-        else if (board.getFields()[i][yCoordinate]== ' ');
+        else if (board.getFields()[i][yCoordinate] == ' ');
         else
         {
             opponentCounterLeft++;
@@ -179,30 +179,30 @@ int AI::evaluateHorizontally(const Board &board, int xCoordinate, int yCoordinat
 
     for(int i = end; i > xCoordinate; --i)
     {
-        if (board.getFields()[i][yCoordinate]==currentPlayer)
+        if (board.getFields()[i][yCoordinate] == currentPlayer)
         {
             counterRight++;
             opponentCounterRight = 0;
         }
-        else if (board.getFields()[i][yCoordinate]== ' ');
+        else if (board.getFields()[i][yCoordinate] == ' ');
         else
         {
             opponentCounterRight++;
             counterRight = 0;
         }
     }
-    if(opponentCounterLeft+opponentCounterRight == board.getWinningNumber() - changeRange) return 1000;
-    if(counterLeft+counterRight == board.getWinningNumber() - changeRange) return 100;
-    return counterLeft+counterRight;
+    if(opponentCounterLeft + opponentCounterRight == board.getWinningNumber() - changeRange) return 1000;
+    if(counterLeft + counterRight == board.getWinningNumber() - changeRange) return 100;
+    return counterLeft + counterRight;
 
 }
 
 int AI::evaluateDiagonally(const Board &board, int xCoordinate, int yCoordinate, char currentPlayer) const
 {
     int startX, endX, startY, endY;
-    startX = xCoordinate - board.getWinningNumber() +changeRange;
+    startX = xCoordinate - board.getWinningNumber() + changeRange;
     endX = xCoordinate + board.getWinningNumber() - changeRange;
-    startY = yCoordinate - board.getWinningNumber() +changeRange;
+    startY = yCoordinate - board.getWinningNumber() + changeRange;
     endY = yCoordinate + board.getWinningNumber() - changeRange;
 
     while(startX < 0 || startY < 0)
@@ -217,17 +217,17 @@ int AI::evaluateDiagonally(const Board &board, int xCoordinate, int yCoordinate,
         endY--;
     }
 
-    int  counter1 =0, counter2 = 0;
-    int opponentCounter1 = 0, opponentCounter2=0;
+    int  counter1 = 0, counter2 = 0;
+    int opponentCounter1 = 0, opponentCounter2 = 0;
 
-    for(int i = startX, j = startY; i < xCoordinate && j< yCoordinate; ++j, ++i)
+    for(int i = startX, j = startY; i < xCoordinate && j < yCoordinate; ++j, ++i)
     {
-        if (board.getFields()[i][j]==currentPlayer)
+        if (board.getFields()[i][j] == currentPlayer)
         {
             counter1++;
             opponentCounter1 = 0;
         }
-        else if (board.getFields()[i][j]== ' ');
+        else if (board.getFields()[i][j] == ' ');
         else
         {
             opponentCounter1++;
@@ -236,30 +236,30 @@ int AI::evaluateDiagonally(const Board &board, int xCoordinate, int yCoordinate,
     }
     for(int i = endX, j = endY; i > xCoordinate && j > yCoordinate; --j, --i)
     {
-        if (board.getFields()[i][j]==currentPlayer)
+        if (board.getFields()[i][j] == currentPlayer)
         {
             counter2++;
             opponentCounter2 = 0;
         }
-        else if (board.getFields()[i][j]== ' ');
+        else if (board.getFields()[i][j] == ' ');
         else
         {
             opponentCounter2++;
             counter2 = 0;
         }
     }
-    if(opponentCounter1+opponentCounter2 == board.getWinningNumber() - changeRange) return 1000;
-    if(counter1+counter2 == board.getWinningNumber() - changeRange) return 100;
-    return counter1+counter2;
+    if(opponentCounter1 + opponentCounter2 == board.getWinningNumber() - changeRange) return 1000;
+    if(counter1 + counter2 == board.getWinningNumber() - changeRange) return 100;
+    return counter1 + counter2;
 
 }
 
 int AI::evaluateAntidiagonally(const Board &board, int xCoordinate, int yCoordinate, char currentPlayer) const
 {
     int startX, endX, startY, endY;
-    startX = xCoordinate + board.getWinningNumber() -changeRange;
+    startX = xCoordinate + board.getWinningNumber() - changeRange;
     endX = xCoordinate - board.getWinningNumber() + changeRange;
-    startY = yCoordinate - board.getWinningNumber() +changeRange;
+    startY = yCoordinate - board.getWinningNumber() + changeRange;
     endY = yCoordinate + board.getWinningNumber() - changeRange;
 
     while (startX >= board.getSize() || startY < 0)
@@ -277,14 +277,14 @@ int AI::evaluateAntidiagonally(const Board &board, int xCoordinate, int yCoordin
     int  counter1 =0, counter2 = 0;
     int opponentCounter1 = 0, opponentCounter2=0;
 
-    for(int i = startX, j = startY; i > xCoordinate && j< yCoordinate; ++j, --i)
+    for(int i = startX, j = startY; i > xCoordinate && j < yCoordinate; ++j, --i)
     {
-        if (board.getFields()[i][j]==currentPlayer)
+        if (board.getFields()[i][j] == currentPlayer)
         {
             counter1++;
             opponentCounter1 = 0;
         }
-        else if (board.getFields()[i][j]== ' ');
+        else if (board.getFields()[i][j] == ' ');
         else
         {
             opponentCounter1++;
@@ -294,7 +294,7 @@ int AI::evaluateAntidiagonally(const Board &board, int xCoordinate, int yCoordin
 
     for(int i = endX, j = endY; i < xCoordinate && j > yCoordinate; --j, ++i)
     {
-        if (board.getFields()[i][j]==currentPlayer)
+        if (board.getFields()[i][j] == currentPlayer)
         {
             counter2++;
             opponentCounter2 = 0;
@@ -307,7 +307,7 @@ int AI::evaluateAntidiagonally(const Board &board, int xCoordinate, int yCoordin
         }
     }
 
-    if(opponentCounter1+opponentCounter2 == board.getWinningNumber() - changeRange) return 1000;
-    if(counter1+counter2 == board.getWinningNumber() - changeRange) return 100;
+    if(opponentCounter1 + opponentCounter2 == board.getWinningNumber() - changeRange) return 1000;
+    if(counter1 + counter2 == board.getWinningNumber() - changeRange) return 100;
     return counter1+counter2;
 }
