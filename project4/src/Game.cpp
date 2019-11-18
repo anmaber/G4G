@@ -42,7 +42,5 @@ void Game::play()
 
         if(currentPlayer_ == player1_) currentPlayer_ = player2_;
         else currentPlayer_ = player1_;
-
     }
-
 }

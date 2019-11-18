@@ -25,5 +25,4 @@ public:
 
     Game(int size, int winningNumber);
     void play();
-
 };

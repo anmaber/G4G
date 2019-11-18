@@ -14,7 +14,7 @@ class AI : public Player
 public:
 
     AI() = default;
-    AI(char sign);
+    explicit AI(char sign);
     std::pair<int,int> move(Board& board);
 
 };

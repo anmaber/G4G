@@ -24,6 +24,5 @@ int main()
             std::cin>> playing;
 
         }
-
 	return 0;
 }
