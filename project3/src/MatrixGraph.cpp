@@ -24,9 +24,9 @@ using EdgeVector = std::vector<Edge>;
 
 void MatrixGraph::dijkstra()
 {
-    std::priority_queue<Edge, EdgeVector,std::greater<Edge>> costVertexPq;
+    std::priority_queue<Edge, EdgeVector, greaterMy<Edge>> costVertexPq;
 
-    costVertexPq.push(Edge(0, begin_));
+    costVertexPq.push({0, begin_});
     distances_[begin_] = 0;
 
     while(!costVertexPq.empty())
@@ -52,7 +52,7 @@ void MatrixGraph::dijkstra()
 
 namespace
 {
-const int range = 50;
+constexpr int range = 50;
 const int changeRangeByOne = 1;
 }
 

@@ -13,12 +13,31 @@ struct Edge
         : vertex(v),
           cost(c)
     {}
+
+//    bool operator>(const Edge y)
+//    {
+//        return this->cost > y.cost;
+//    }
 };
 
-bool operator>(Edge const& x, Edge const& y)
+template<typename T = Edge>
+struct greaterMy
 {
-    return x.cost > y.cost;
-}
+    bool operator()(T& left, T& right)
+    {
+        return left.cost < right.cost;
+    }
+};
+
+class LowerOperator
+{
+public:
+    bool operator()(Edge& left, Edge& right)
+    {
+        return left.cost < right.cost;
+    }
+};
+
 
 class Graph
 {

@@ -121,12 +121,14 @@ int AI::evaluateVertically(const Board &board, int xCoordinate, int yCoordinate,
     int opponentCounterTop = 0, opponentCounterBottom = 0;
     for(int i = start; i < yCoordinate; ++i)
     {
-        if (board.getFields()[xCoordinate][i] == currentPlayer)
+        auto placePool = board.getFields()[xCoordinate][i];
+
+        if (location == currentPlayer)
         {
             counterBottom++;
             opponentCounterBottom = 0;
         }
-        else if (board.getFields()[xCoordinate][i] == ' ');
+        else if (placePool == ' ');
         else
         {
             opponentCounterBottom++;
