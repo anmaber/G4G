@@ -14,10 +14,10 @@ struct Edge
           cost(c)
     {}
 
-//    bool operator>(const Edge y)
-//    {
-//        return this->cost > y.cost;
-//    }
+    bool operator > (const Edge& y) const
+    {
+        return this->cost > y.cost;
+    }
 };
 
 template<typename T = Edge>

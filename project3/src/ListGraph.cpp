@@ -22,7 +22,7 @@ using EdgeVector = std::vector<Edge>;
 
 void ListGraph::dijkstra()
 {
-    std::priority_queue<Edge,EdgeVector,LowerOperator> costVertexPq;
+    std::priority_queue<Edge,EdgeVector,std::greater<Edge>> costVertexPq;
 
 int begin = begin_;
     costVertexPq.push(Edge(0, begin));
